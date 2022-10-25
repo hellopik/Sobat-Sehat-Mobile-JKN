@@ -392,7 +392,7 @@ const DetailRiwayat = (props) => {
             <TouchableOpacity onPress={()=>navigation.goBack()}>
               <Ionicons name='arrow-back' style={{fontSize:30, color:'white'}}/>              
             </TouchableOpacity>
-            <Text style={{fontSize:14 , color:'white'}}>Detail Pengajuan Rujukan</Text>
+            <Text style={{fontSize:14 , color:'white'}}>Detail Pengajuan Rekomendasi</Text>
             <Ionicons name='wifi' style={{fontSize:30, color:'white'}}/>
           </View>
         </ImageBackground>

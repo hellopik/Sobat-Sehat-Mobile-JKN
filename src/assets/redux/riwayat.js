@@ -1,12 +1,11 @@
 const initialState = [
   {
     id:'691b6fb6-7198-4bcb-a89b-2488cb4e36ce',
-    norekom:'1/RUJUKAN/10/2022',
+    norekom:'1/REKOM/10/2022',
     namadokter:'MUHAMMAD FAKRI FADLI',
     tanggalaju:'Minggu, 19 Oktober 2022',
-    tanggalberakhir:'Senin, 31 Oktober 2022',
     kategoripoli:'Poli Umum',
-    status:'Terbit Rujukan',
+    status:'Terbit Rekomendasi',
     keluhan:'Pusing Mual dan Sakit Kepala',
     color:'green'
   }

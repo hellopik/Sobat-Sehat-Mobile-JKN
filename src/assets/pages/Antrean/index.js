@@ -296,7 +296,6 @@ const SecondRoute = (props) => {
               norekom:'-',
               namadokter:'MUHAMMAD FAKRI FADLI',
               tanggalaju:'Minggu, 23 Oktober 2022',
-              tanggalberakhir:'-',
               kategoripoli:'Poli Umum',
               status:'Proses Konsultasi',
               keluhan:keluhan,
@@ -324,7 +323,7 @@ const FirstRoute = (props) => {
         return(
           <View key={index} style={{
             flexDirection:'row', 
-            height:windowHeight*0.4, 
+            height:windowHeight*0.3, 
             padding:10,
             marginVertical:5,
             borderWidth: 0.1,
@@ -337,7 +336,7 @@ const FirstRoute = (props) => {
             }}>
               <View style={{flex:4, padding:20, flexDirection:'column', justifyContent:'space-between'}}>
                 <View style={{flexDirection:'column'}}>
-                  <Text style={{fontWeight:'bold'}}>Nomor Rujukan</Text>
+                  <Text style={{fontWeight:'bold'}}>Nomor Rekomendasi</Text>
                   <Text>{el.norekom}</Text>
                 </View>                
                 <View style={{flexDirection:'column'}}>
@@ -348,10 +347,6 @@ const FirstRoute = (props) => {
                   <Text style={{fontWeight:'bold'}}>Tanggal Pengajuan</Text>
                   <Text>{el.tanggalaju}</Text>
                 </View>  
-                <View style={{flexDirection:'column'}}>
-                  <Text style={{fontWeight:'bold'}}>Tanggal Berakhir</Text>
-                  <Text>{el.tanggalberakhir}</Text>
-                </View>                  
                 <View style={{flexDirection:'column'}}>
                   <Text style={{fontWeight:'bold'}}>Status</Text>
                   <Text style={{fontWeight:'bold', color:el.color}}>{el.status}</Text>
@@ -383,7 +378,7 @@ const FirstRoute = (props) => {
                   </Button>                  
                 } 
                 {
-                  el.status === 'Terbit Rujukan' ? 
+                  el.status === 'Terbit Rekomendasi' ? 
                   <Button icon="forward" style={{backgroundColor:'white',
                   borderRadius: 30,
                   borderWidth: 1,
@@ -410,33 +405,32 @@ const FirstRoute = (props) => {
 const ThirdRoute = () => {
   const [faskesLanjutan, setFaskesLanjutan] = useState(["RSUD Jakarta Timur"])
   const [kirim, setKirim] = useState(false)
-  const [peserta, setPeserta] = useState(["SUGENG RIYADI (0000005463748)"])
-  const [faskes, setFaskses] = useState([
-    {
-      norekom:'1/RUJUKAN/10/2022',
-      namars:'RS PRIMAYA',
-      tglrujukan:'Senin, 24 Oktober 2022',
-      poli:'UMUM',
-      antrean:'Belum ambil antrean'
-    }
-  ])
-  const [poli, setPoli] = useState(["POLI UMUM"])
-  const [tgldaftar, setTgldaftar] = useState([`Besok (${moment().add(1,'days').format('DD-MM-YYYY')})`])
-  const [dokter, setDokter] = useState([
-    {
-      nama:'DR TARA ASEANA',
-      jamoperasional:'00.00 - 12.00',
-      status:'BUKA'
-    }
-  ])
-  const [keluhan, setKeluhan] = useState("")  
-  const [norujukan, setNorujukan] = useState()
   return(
-    <ScrollView contentContainerStyle={{alignItems:'center'}} style={{ flex: 1, backgroundColor: 'white', flexDirection:'column', paddingTop:10, paddingHorizontal:20}}>
-      <View style={{flexDirection:'column', paddingTop:10}}>
-        <Text style={{paddingLeft:5, paddingBottom:5, fontWeight:'bold', color:'#2496d4'}}>Peserta</Text>
+    <View style={{flex:1, flexDirection:'column', padding:20, backgroundColor:'white'}}>
+      {
+        !kirim ? 
+      <View style={{backgroundColor:'white', height:windowHeight*0.35,
+                borderRadius:10,
+                shadowColor: 'black',
+                shadowOpacity: 0.26,
+                shadowOffset: { width: 0, height: 2},
+                shadowRadius: 8,
+                elevation: 6, padding:40, flexDirection:'column',
+                justifyContent:'center',
+                marginBottom:20
+    }}>
+      <View style={{flexDirection:'column', marginBottom:10}}>
+        <Text style={{fontWeight:'bold', marginBottom:5}}>Nomor Rekomendasi</Text>
+        <Text>1/REKOM/10/2022</Text>
+      </View>
+      <View style={{flexDirection:'column', marginBottom:10}}>
+        <Text style={{fontWeight:'bold', marginBottom:5}}>Faskes Pertama</Text>
+        <Text>MUHAMMAD FAKRI FADLI</Text>
+      </View>
+      <View style={{flexDirection:'column', marginBottom:20}}>
+        <Text style={{fontWeight:'bold', marginBottom:5}}>Faskes Lanjutan</Text>
         <SelectDropdown
-        data={peserta}
+        data={faskesLanjutan}
         defaultValueByIndex={0}
         selectedRowStyle={{
           backgroundColor:'white'
@@ -469,302 +463,44 @@ const ThirdRoute = () => {
           // if data array is an array of objects then return item.property to represent item in dropdown
           return item
         }}
-        />      
-      </View> 
-      <View style={{flexDirection:'column', paddingTop:10}}>
-        <Text style={{paddingLeft:5, paddingBottom:5, fontWeight:'bold', color:'#2496d4'}}>Pilih Nomor Rujukan</Text>
-        <SelectDropdown
-        data={faskes}
-        renderDropdownIcon={isOpened => {
-          return <Ionicons name={isOpened ?'chevron-up-circle-outline': 'chevron-down-circle-outline'} style={{fontSize:30, color:'#2496d4'}}/>  ;
-        }}   
-        // defaultValueByIndex={0}
-        selectedRowStyle={{
-          backgroundColor:'white'
-        }}
-        onSelect={(item, index)=>setNorujukan(item)}
-        rowStyle={{backgroundColor:'white'}}
-        buttonStyle={{
-          width: '95%',
-          height: windowHeight*0.2,
-          backgroundColor: '#FFF',
-          paddingHorizontal:3,
-          // borderRadius: 8,
-          // borderWidth: 1,
-          // borderColor: '#2496d4'        
-        }}
-        renderCustomizedButtonChild={(selectedItem, index) => {
-          return (
-            <View style={{flexDirection:'column',
-            borderRadius: 8,
-            borderWidth: 1,
-            borderColor: '#2496d4',
-            width:'95%'            
-            }}>
-              {
-                selectedItem ? (
-                  <View>
-                  <View style={{
-                    borderRadius: 10,
-                    borderBottomWidth: 1,
-                    borderColor: '#2496d4',
-                    alignItems:'center',
-                    padding:5
-                  }}>
-                    <Text>{selectedItem?.norekom}</Text>                
-                  </View>
-                  <View style={{flexDirection:'column', padding:10}}>                  
-                    <View style={{flexDirection:'row', justifyContent:'flex-start'}}>
-                    <Text style={{flex:1}}>Nama RS : </Text> 
-                    <Text style={{flex:1}}>{selectedItem?.namars}</Text> 
-                    </View>
-                    <View style={{flexDirection:'row', justifyContent:'flex-start'}}>
-                    <Text style={{flex:1}}>Tgl Rujukan : </Text> 
-                    <Text style={{flex:1}}>{selectedItem?.tglrujukan}</Text> 
-                    </View>
-                    <View style={{flexDirection:'row', justifyContent:'flex-start'}}>
-                    <Text style={{flex:1}} >Poli : </Text> 
-                    <Text style={{flex:1}}>{selectedItem?.poli}</Text> 
-                    </View>
-                    <View style={{flexDirection:'row', justifyContent:'flex-start'}}>
-                    <Text style={{flex:1}}>Antrean : </Text> 
-                    <Text style={{flex:1}}>{selectedItem?.antrean}</Text>                     
-                    </View>                               
-                  </View>
-                  </View>
-                ) : (
-                  <View style={{padding:20}}>
-                    <Text>Harap Pilih Nomor Rujukan</Text>
-                  </View>                    
-                )                
-              }
-            </View>            
-          );
-        }}        
-        rowTextForSelection={(item, index) => {
-          // text represented for each item in dropdown
-          // if data array is an array of objects then return item.property to represent item in dropdown
-          return item.norekom
-        }}       
-        />      
-      </View> 
-      {
-        norujukan ? 
-        <>
-      <View style={{flexDirection:'column', paddingTop:10, width:'95%'}}>
-        <Text style={{paddingLeft:0, paddingBottom:5, fontWeight:'bold', color:'#2496d4'}}>RS PRIMAYA</Text>
-        <View style={{flexDirection:'row', justifyContent:'space-between'}}>
-          <View style={{flexDirection:'column'}}>
-            <Text style={{fontWeight:'bold', color:'grey'}}>Jumlah Pasien</Text>
-            <Text>0</Text>
-          </View>
-          <View style={{flexDirection:'column'}}>
-            <Text style={{fontWeight:'bold', color:'grey'}}>Sisa Kuota</Text>
-            <Text>24</Text>
-          </View>
-          <View style={{flexDirection:'column'}}>
-            <Text style={{fontWeight:'bold', color:'grey'}}>Tanggal</Text>
-            <Text>27-10-2022</Text>
-          </View>                    
-        </View>     
-      </View> 
-      <View style={{flexDirection:'column', paddingTop:10}}>
-        <Text style={{paddingLeft:5, paddingBottom:5, fontWeight:'bold', color:'#2496d4'}}>Pilih Tanggal Kunjungan</Text>
-        <SelectDropdown
-        data={tgldaftar}
-        defaultValueByIndex={0}
-        selectedRowStyle={{
-          backgroundColor:'white'
-        }}
-        rowStyle={{backgroundColor:'white'}}
-        buttonStyle={{
-          width: '95%',
-          height: 45,
-          backgroundColor: '#FFF',
-          borderRadius: 8,
-          borderWidth: 1,
-          borderColor: '#2496d4'
-        }}
-        buttonTextStyle={{
-          textAlign:'left',
-          marginHorizontal:0,
-          fontSize:15
-        }}
-        renderDropdownIcon={isOpened => {
-          return <Ionicons name={isOpened ?'chevron-up-circle-outline': 'chevron-down-circle-outline'} style={{fontSize:30, color:'#2496d4'}}/>  ;
-        }}      
-        buttonTextAfterSelection={(selectedItem, index) => {
-          // text represented after item is selected
-          // if data array is an array of objects then return selectedItem.property to render after item is selected
-          return selectedItem
-        }}
-        rowTextForSelection={(item, index) => {
-          // text represented for each item in dropdown
-          // if data array is an array of objects then return item.property to represent item in dropdown
-          return item
-        }}
-        />      
-      </View>          
-      <View style={{flexDirection:'column', paddingTop:10}}>
-        <Text style={{paddingLeft:5, paddingBottom:5, fontWeight:'bold', color:'#2496d4'}}>Pilih Dokter</Text>
-        <SelectDropdown
-        data={dokter}
-        selectedRowStyle={{
-          backgroundColor:'white'
-        }}
-        rowStyle={{backgroundColor:'white'}}
-        buttonStyle={{
-          width: '95%',
-          height: windowHeight*0.08,
-          backgroundColor: '#FFF',
-          borderRadius: 8,
-          borderWidth: 1,
-          borderColor: '#2496d4'
-        }}
-        buttonTextStyle={{
-          textAlign:'left',
-          marginHorizontal:0,
-          fontSize:15
-        }}
-        renderDropdownIcon={isOpened => {
-          return <Ionicons name={isOpened ?'chevron-up-circle-outline': 'chevron-down-circle-outline'} style={{fontSize:30, color:'#2496d4'}}/>  ;
-        }}      
-        renderCustomizedButtonChild={(selectedItem, index) => {
-          return (
-            <View>
-              {
-                selectedItem ? (
-                  <View style={{flexDirection:'row',
-                  justifyContent:'space-between',
-                  alignItems:'center',
-                  width:'95%'            
-                  }}>                  
-                  <View style={{flex:1}}>
-                    <Text>{selectedItem?.nama}</Text>
-                  </View>
-                  <View style={{flex:1, flexDirection:'row', justifyContent:'flex-end'}}>
-                    <Text style={{marginRight:10}}>{selectedItem?.jamoperasional}</Text>
-                  </View> 
-                  </View>                                    
-                ) : (
-                  <View>
-                    <Text>Harap Pilih Dokter</Text>
-                  </View>
-                )
-              } 
-              </View>            
-          );
-        }}          
-        rowTextForSelection={(item, index) => {
-          // text represented for each item in dropdown
-          // if data array is an array of objects then return item.property to represent item in dropdown
-          return item.nama
-        }}
-        />      
+        /> 
       </View>  
-      <Button mode="contained" style={{width:0.8*windowWidth, backgroundColor:'green', borderRadius:50, marginTop:20}}>
-          Daftar Pelayanan
-      </Button>            
-        </>  
-        :
-        ""              
-      }             
-      </ScrollView>    
-    // <View style={{flex:1, flexDirection:'column', padding:20, backgroundColor:'white'}}>
-    //   {
-    //     !kirim ? 
-    //   <View style={{backgroundColor:'white', height:windowHeight*0.35,
-    //             borderRadius:10,
-    //             shadowColor: 'black',
-    //             shadowOpacity: 0.26,
-    //             shadowOffset: { width: 0, height: 2},
-    //             shadowRadius: 8,
-    //             elevation: 6, padding:40, flexDirection:'column',
-    //             justifyContent:'center',
-    //             marginBottom:20
-    // }}>
-    //   <View style={{flexDirection:'column', marginBottom:10}}>
-    //     <Text style={{fontWeight:'bold', marginBottom:5}}>Nomor Rujukan</Text>
-    //     <Text>1/RUJUKAN/10/2022</Text>
-    //   </View>
-    //   <View style={{flexDirection:'column', marginBottom:10}}>
-    //     <Text style={{fontWeight:'bold', marginBottom:5}}>Faskes Pertama</Text>
-    //     <Text>MUHAMMAD FAKRI FADLI</Text>
-    //   </View>
-    //   <View style={{flexDirection:'column', marginBottom:20}}>
-    //     <Text style={{fontWeight:'bold', marginBottom:5}}>Faskes Lanjutan</Text>
-    //     <SelectDropdown
-    //     data={faskesLanjutan}
-    //     defaultValueByIndex={0}
-    //     selectedRowStyle={{
-    //       backgroundColor:'white'
-    //     }}
-    //     onSelect={(item, index)=>console.log(item)}
-    //     rowStyle={{backgroundColor:'white'}}
-    //     buttonStyle={{
-    //       width: '95%',
-    //       height: 45,
-    //       backgroundColor: '#FFF',
-    //       borderRadius: 8,
-    //       borderWidth: 1,
-    //       borderColor: '#2496d4'
-    //     }}
-    //     buttonTextStyle={{
-    //       textAlign:'left',
-    //       marginHorizontal:0,
-    //       fontSize:15
-    //     }}
-    //     renderDropdownIcon={isOpened => {
-    //       return <Ionicons name={isOpened ?'chevron-up-circle-outline': 'chevron-down-circle-outline'} style={{fontSize:30, color:'#2496d4'}}/>  ;
-    //     }}      
-    //     buttonTextAfterSelection={(selectedItem, index) => {
-    //       // text represented after item is selected
-    //       // if data array is an array of objects then return selectedItem.property to render after item is selected
-    //       return selectedItem
-    //     }}
-    //     rowTextForSelection={(item, index) => {
-    //       // text represented for each item in dropdown
-    //       // if data array is an array of objects then return item.property to represent item in dropdown
-    //       return item
-    //     }}
-    //     /> 
-    //   </View>  
-    //   <View style={{flexDirection:'row', justifyContent:'center'}}>
-    //     <Button mode='outlined' onPress={()=>setKirim(true)}>Kirim</Button>
-    //   </View>          
-    //   </View>
-    //   :
-    //   <View style={{backgroundColor:'white', height:windowHeight*0.35,
-    //             borderRadius:10,
-    //             shadowColor: 'black',
-    //             shadowOpacity: 0.26,
-    //             shadowOffset: { width: 0, height: 2},
-    //             shadowRadius: 8,
-    //             elevation: 6, padding:40, flexDirection:'column',
-    //             justifyContent:'center'
-    // }}>
-    //   <View style={{flexDirection:'column', marginBottom:10}}>
-    //     <Text style={{fontWeight:'bold', marginBottom:5}}>Nomor Rujukan</Text>
-    //     <Text>1/RUJUKAN/10/2022</Text>
-    //   </View>
-    //   <View style={{flexDirection:'column', marginBottom:10}}>
-    //     <Text style={{fontWeight:'bold', marginBottom:5}}>Faskes Pertama</Text>
-    //     <Text>MUHAMMAD FAKRI FADLI</Text>
-    //   </View>
-    //   <View style={{flexDirection:'column', marginBottom:10}}>
-    //     <Text style={{fontWeight:'bold', marginBottom:5}}>Faskes Lanjutan</Text>
-    //     <Text>RSUD Jakarta Timur</Text>
-    //   </View> 
-    //   <View style={{flexDirection:'column', marginBottom:10}}>
-    //     <Text style={{fontWeight:'bold', marginBottom:5}}>Status</Text>
-    //     <Text style={{fontWeight:'bold', fontSize:15, color:'green'}}>Menunggu Antrian [10 Antrian]</Text>
-    //   </View> 
-    //   <View style={{flexDirection:'row', justifyContent:'center'}}>
-    //     <Button icon="download" mode='outlined' onPress={()=>setKirim(true)}>Cetak Antrian</Button>
-    //   </View>                      
-    //   </View>  
-    //   }    
-    // </View>    
+      <View style={{flexDirection:'row', justifyContent:'center'}}>
+        <Button mode='outlined' onPress={()=>setKirim(true)}>Kirim</Button>
+      </View>          
+      </View>
+      :
+      <View style={{backgroundColor:'white', height:windowHeight*0.35,
+                borderRadius:10,
+                shadowColor: 'black',
+                shadowOpacity: 0.26,
+                shadowOffset: { width: 0, height: 2},
+                shadowRadius: 8,
+                elevation: 6, padding:40, flexDirection:'column',
+                justifyContent:'center'
+    }}>
+      <View style={{flexDirection:'column', marginBottom:10}}>
+        <Text style={{fontWeight:'bold', marginBottom:5}}>Nomor Rekomendasi</Text>
+        <Text>1/REKOM/10/2022</Text>
+      </View>
+      <View style={{flexDirection:'column', marginBottom:10}}>
+        <Text style={{fontWeight:'bold', marginBottom:5}}>Faskes Pertama</Text>
+        <Text>MUHAMMAD FAKRI FADLI</Text>
+      </View>
+      <View style={{flexDirection:'column', marginBottom:10}}>
+        <Text style={{fontWeight:'bold', marginBottom:5}}>Faskes Lanjutan</Text>
+        <Text>RSUD Jakarta Timur</Text>
+      </View> 
+      <View style={{flexDirection:'column', marginBottom:10}}>
+        <Text style={{fontWeight:'bold', marginBottom:5}}>Status</Text>
+        <Text style={{fontWeight:'bold', fontSize:15, color:'green'}}>Menunggu Antrian [10 Antrian]</Text>
+      </View> 
+      <View style={{flexDirection:'row', justifyContent:'center'}}>
+        <Button icon="download" mode='outlined' onPress={()=>setKirim(true)}>Cetak Antrian</Button>
+      </View>                      
+      </View>  
+      }    
+    </View>    
   )
 }
 

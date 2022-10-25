@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "sobatsehat",
-    "slug": "sobatsehat",
+    "name": "sobatsehatjkn",
+    "slug": "sobatsehatjkn",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -25,24 +25,14 @@
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#FFFFFF"
       },
-      "package": "com.taufiqmahendra.sobatsehat"
+      "package": "com.sobatsehat.mobilejkn"
     },
     "web": {
       "favicon": "./assets/favicon.png"
     },
-    "packagerOpts": {
-      "config": "metro.config.js",
-      "sourceExts": [
-        "js",
-        "jsx",
-        "ts",
-        "tsx",
-        "svg"
-      ]
-    },
     "extra": {
       "eas": {
-        "projectId": "f4e72d8b-f77d-441e-8806-1755daf3c620"
+        "projectId": "07391f78-29c4-4d30-be3e-77b5cb2fcd62"
       }
     }
   }
